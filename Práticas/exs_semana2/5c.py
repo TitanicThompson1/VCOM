@@ -1,11 +1,10 @@
 import cv2 as cv
 import os
-import numpy as np
-from matplotlib import pyplot as plt
 
 dataDir = '../Images_01'
 
 img = cv.imread(os.path.join(dataDir, 'lowContrast_05.jpg'))
+print(img.shape)
 
 # blue, green, red = cv.split(img)
 
