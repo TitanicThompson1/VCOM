@@ -1,8 +1,6 @@
 import cv2 as cv
 import os
 
-from cv2 import threshold
-
 trackbar_name = "Threshold Value"
 window_name = "Gradient"
 
