@@ -10,19 +10,20 @@ corners_img_copy = corners_img.copy()
 gray = cv.cvtColor(corners_img, cv.COLOR_BGR2GRAY)
 gray = np.float32(gray)
 
-neighbourhood = 2
-aperture = 3
-free_param = 0.04
-dst = cv.cornerHarris(gray, neighbourhood, aperture, free_param)
+max_corners = 25
+quality = 0.5
+mindistance = 20
 
-dst = cv.dilate(dst, None)
+corners = cv.goodFeaturesToTrack(gray, max_corners, quality, mindistance)
+corners = np.int0(corners)
 
-threshold = 0.01
-corners_img[dst > threshold * dst.max()] = [0, 0, 255]
+for i in corners:
+    x, y = i.ravel()
+    cv.circle(corners_img_copy, (x, y), 3, 255, -1)
 
 cv.imshow('corners_img_copy', corners_img_copy)
 cv.imshow('corners_img', corners_img)
 
-
 cv.waitKey(0)
 cv.destroyAllWindows()
+
