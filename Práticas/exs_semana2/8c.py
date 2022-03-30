@@ -1,55 +1,33 @@
-import math
 import cv2 as cv
 import numpy as np
 import os
 
-
-def extract_line_points(lines, i):
-    rho = lines[i][0][0]
-    theta = lines[i][0][1]
-    a = math.cos(theta)
-    b = math.sin(theta)
-    x0 = a * rho
-    y0 = b * rho
-    pt1 = (int(x0 + 1000*(-b)), int(y0 + 1000*(a)))
-    pt2 = (int(x0 - 1000*(-b)), int(y0 - 1000*(a)))
-    return pt1, pt2
-
-
 dataDir = '../Images_01'
 
-img_chess = cv.imread(os.path.join(dataDir, 'chessboard_02.jpg'), 0)
-img_road = cv.imread(os.path.join(dataDir, 'streetLines_01.jpg'), 0)
+# coins_img = cv.imread(os.path.join(dataDir, 'coins_01.jpg'), 0)
+coins_img = cv.imread(os.path.join(dataDir, 'coins_02.jpg'), 0)
 
+coins_img = cv.blur(coins_img, (3, 3))
 
-img_chess_canny = cv.Canny(img_chess, 100, 200)
-img_road_canny = cv.Canny(img_road, 100, 200)
+# Copy edges to the image that will display the results
+coinsCopy = cv.cvtColor(coins_img, cv.COLOR_GRAY2RGB)
 
-img_chess_wlines = cv.cvtColor(img_chess_canny, cv.COLOR_GRAY2BGR)
-img_road_wlines = cv.cvtColor(img_road_canny, cv.COLOR_GRAY2BGR)
+# Apply the Hough circle transform
+detectionMethod = cv.HOUGH_GRADIENT                 # corresponds to the canny filter
+resolutionFlag = 1                                  # same resolution as the original image
+minDistance = 20                                    # between the centers of the detected circles
 
-lines_chess_P = cv.HoughLinesP(img_chess_canny, 1, np.pi / 180, 20)
-lines_road_P = cv.HoughLinesP(img_road_canny, 1, np.pi / 180, 20)
+# param1 and param2 are the thresholds passed to the detection method 
+circles = cv.HoughCircles(coins_img, detectionMethod, resolutionFlag,
+                          minDistance, param1=200, param2=180, minRadius=10, maxRadius=0)
+circles = np.uint16(np.around(circles))
 
+# Drawing the resulting circles
+for i in circles[0,:]: 
+    cv.circle(coinsCopy,(i[0],i[1]),i[2],(0,255,0),2)
 
-if lines_chess_P is not None:
-    for i in range(0, len(lines_chess_P)):
-        l = lines_chess_P[i][0]
-        cv.line(img_chess_wlines, (l[0], l[1]), (l[2], l[3]),
-                (0, 0, 255), 1, cv.LINE_AA)
-
-if lines_road_P is not None:
-    for i in range(0, len(lines_road_P)):
-        l = lines_road_P[i][0]
-        cv.line(img_road_wlines, (l[0], l[1]), (l[2], l[3]),
-                (0, 0, 255), 1, cv.LINE_AA)
-
-
-cv.imshow("Original Chess", img_chess)
-cv.imshow("HoughLines Chess", img_chess_wlines)
-
-cv.imshow("Original Road", img_road)
-cv.imshow("HoughLines Road", img_road_wlines)
+cv.imshow("Coins", coins_img)
+cv.imshow("Coin lines", coinsCopy)
 
 cv.waitKey(0)
 
