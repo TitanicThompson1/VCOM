@@ -34,7 +34,8 @@ markers[unknown == 255] = 0
 markers = cv.watershed(coins, markers)
 coins[markers == -1] = [255, 0, 0]
 
-cv.imshow('coins', coins)
+# Display results
+cv.imshow("coins", coins)
 
 cv.waitKey(0)
 cv.destroyAllWindows()
