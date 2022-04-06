@@ -2,6 +2,8 @@ import numpy as np
 import cv2 as cv
 import os
 
+# Watershed algorithm
+
 imagesDir = '../Images_01'  # Change this, according to your images' directory path
 
 # Change this, according to your image's path
