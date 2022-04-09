@@ -6,37 +6,39 @@ imagesDir = "Images_01/"
 
 # Opening an image
 # Change this, according to your image's path
-image = cv.imread(os.path.join(imagesDir, 'roundObjects_01.jpg'))
-image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+img = cv.imread(os.path.join(imagesDir, 'roundObjects_01.jpg'))
+img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
-blur = cv.GaussianBlur(image, (5, 5), 0)
+ret, thresh = cv.threshold(img_gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)
 
-Z = image.reshape((-1, 3))
-Z = np.float32(Z)
+kernel = np.ones((3, 3), np.uint8)
+opening = cv.morphologyEx(thresh, cv.MORPH_OPEN, kernel, iterations=2)
 
-criteria = (cv.TermCriteria_MAX_ITER + cv.TermCriteria_EPS, 10, 1.0)
-k = 2
+background = cv.dilate(opening, kernel, iterations=3)
 
-ret, label, center = cv.kmeans(
-    Z, k, None, criteria, 10, cv.KMEANS_RANDOM_CENTERS)
+distTrans = cv.distanceTransform(opening, cv.DIST_L1, 5)
+ret, fg = cv.threshold(distTrans, 0.7 * distTrans.max(), 255, 0)
 
-center = np.uint8(center)
-kmeans = center[label.flatten()]
-kmeans = kmeans.reshape((image.shape))
+fg = np.uint8(fg)
+unknown = cv.subtract(background, fg)
 
+# Marker labelling
+ret, markers = cv.connectedComponents(fg)
 
-canny = cv.Canny(kmeans, 30, 150, 3)
-dilated = cv.dilate(canny, (1, 1), iterations=0)
+# Add one to all labels so that sure background is not 0, but 1
+markers = markers + 1
 
-(cnt, hierarchy) = cv.findContours(
-    dilated.copy(), cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
+# Now, mark the region of unknown with zero
+markers[unknown == 255] = 0
 
-cv.drawContours(image, cnt, -1, (0, 255, 0), 2)
-print(len(cnt))
+markers = cv.watershed(img, markers)
+img[markers == -1] = [255, 0, 0]
 
-cv.imshow('image', image)
-cv.imshow('canny', canny)
-cv.imshow('dilated', dilated)
+# Display results
+cv.imshow("img", img)
+cv.imshow("background", background)
+cv.imshow("fg", fg)
+cv.imshow("opening", opening)
 
 cv.waitKey(0)
 cv.destroyAllWindows()

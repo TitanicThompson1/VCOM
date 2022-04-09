@@ -4,7 +4,7 @@ import os
 
 # Watershed algorithm
 
-imagesDir = '../Images_01'  # Change this, according to your images' directory path
+imagesDir = 'Images_01'  # Change this, according to your images' directory path
 
 # Change this, according to your image's path
 coins = cv.imread(os.path.join(imagesDir, 'watershed_coins.jpg'))
