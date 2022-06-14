@@ -1,0 +1,2 @@
+O threshold num problema multilabel pode ser ajustado empiricamente
+

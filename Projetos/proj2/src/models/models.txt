@@ -1,0 +1,32 @@
+814035:
+    Loss: CrossEntropyLoss w/weights
+    Optimizer: Adam
+    Resnet no fine tuning
+
+391850:
+    Loss: CrossEntropyLoss w/weights
+    Optimizer: Adam
+    Resnet w/fine tuning
+
+853363:
+    Loss: BCEwithLogits w/weights
+    Optimizer: Adam
+    Custom Model
+
+838258: 
+    Loss: CrossEntropyLoss w/weights
+    Multilabel
+    Optimizer: Adam
+    Resnet w/fine tuning
+
+822945:
+    Loss: CrossEntropyLoss w/weights
+    Multilabel
+    Optimizer: Adam
+    Resnet no fine tuning
+
+955850:
+    Loss: BCEwithLogits w/weights
+    Multilabel
+    Optimizer: Adam
+    Custom

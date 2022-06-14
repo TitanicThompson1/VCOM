@@ -1,0 +1,39 @@
+TP on dataset/simple_medium_images/cw_117.png
+TN on dataset/simple_medium_images/sp_783.png
+TP on dataset/simple_medium_images/cw_285.png
+TP on dataset/simple_medium_images/cw_114.png
+TP on dataset/simple_medium_images/cw_151.png
+FN on dataset/simple_medium_images/cw_165.png
+TP on dataset/simple_medium_images/cw_91.png
+TP on dataset/simple_medium_images/cw_tl_657.png
+FN on dataset/simple_medium_images/cw_82.png
+TN on dataset/simple_medium_images/sp_204.png
+FN on dataset/simple_medium_images/bs_sp_829.png
+TP on dataset/simple_medium_images/cw_525.png
+FN on dataset/simple_medium_images/cw_524.png
+FN on dataset/simple_medium_images/cw_107.png
+FN on dataset/simple_medium_images/bs_sp_824.png
+FN on dataset/simple_medium_images/cw_tl_sp_771.png
+TP on dataset/simple_medium_images/cw_465.png
+FN on dataset/simple_medium_images/bs_sp_822.png
+TN on dataset/simple_medium_images/sp_227.png
+FN on dataset/simple_medium_images/cw_410.png
+FN on dataset/simple_medium_images/cw_98.png
+FN on dataset/simple_medium_images/bs_sp_731.png
+FN on dataset/simple_medium_images/cw_349.png
+FN on dataset/simple_medium_images/bs_sp_765.png
+TP on dataset/simple_medium_images/cw_809.png
+TP on dataset/simple_medium_images/cw_350.png
+FN on dataset/simple_medium_images/cw_635.png
+FN on dataset/simple_medium_images/cw_226.png
+FN on dataset/simple_medium_images/cw_tl_tl_tl_208.png
+FN on dataset/simple_medium_images/cw_774.png
+FN on dataset/simple_medium_images/cw_837.png
+True positives: 10
+False positives: 0
+False negatives: 18
+True negatives: 3
+Total: 31
+Accuracy: 0.41935483870967744
+Precision: 1.0
+Recall: 0.35714285714285715

@@ -1,0 +1,29 @@
+Abstrato MAFALDA 
+
+Introdução MAFALDA
+
+Dataset RICARDO
+	- Falar do balanceamento das classes, para os dois problemas
+	- Falar como mitigamos isso
+
+Data Augmentation MARIA
+
+IC - Basic Version MAFALDA
+	- Falar do modelo, loss e otimizador escolhidos
+	- Resultados dos modelos, comparações
+	
+IC - Intermidiate Version MARIA
+	- Falar da arquitetura escolhida, porquê, etc. Incluir diagramas
+	- Resultados do modelo, comparações
+	
+IC - Advanced Version RICARDO
+	- Falar da adaptação para multi-label
+	- Resultados e comparação
+	
+OD - Basic Version MAFALDA
+
+
+OD - Advanced Version MAFALDA
+	
+
+Conclusão MAFALDA
